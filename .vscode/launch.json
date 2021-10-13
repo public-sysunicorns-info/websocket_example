@@ -11,6 +11,17 @@
             "args": [],
             "env": {
             }
+        },
+        {
+            "name": "Client.Run",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/src/test_device.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "env": {
+            }
         }    
     ]
 }

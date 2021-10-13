@@ -42,6 +42,7 @@ DEFAULT_LOGGING_CONFIG = {
         },
         "loggers": {
             "application": {"handlers": ["application"], "level": "DEBUG"},
+            "fastapi": {"handlers":["default"], "level":"DEBUG"},
             "uvicorn": {"handlers": ["default"], "level": "INFO"},
             "uvicorn.error": {"level": "INFO"},
             "uvicorn.access": {"handlers": ["access"], "level": "INFO", "propagate": False},

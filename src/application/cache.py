@@ -1,7 +1,6 @@
 from contextlib import asynccontextmanager
 from typing import AsyncContextManager
-from aioredis import ConnectionPool
-from aioredis import Redis
+from aioredis import ConnectionPool, Redis
 import logging
 
 from application.service.health import HealthService
@@ -26,13 +25,11 @@ class Cache:
 
     async def init_connection_pool(self) -> None:
         try:
-            ConnectionPool()
-            self._redis_pool = ConnectionPool(
+            self._redis_pool = Redis.from_url(
                 encoding=self.ENCODING,
-                address=self.redis_config.url,
+                url=self.redis_config.url,
                 db=self.redis_config.db_index,
-                minsize=self.redis_config.pool_minsize,
-                maxsize=self.redis_config.pool_maxsize)
+                max_connections=self.redis_config.pool_maxsize)
         except Exception as e:
             self.health_service.set_cache_health(cache_health=False)
             logger.critical(f"Redis {self._name} Engine Unable to be created")
@@ -44,14 +41,13 @@ class Cache:
     @asynccontextmanager
     async def acquire(self) -> AsyncContextManager[Redis]:
         try:
-            _redis_connection = await self._redis_pool.acquire()
+            _redis_connection = await self._redis_pool.client()
         except Exception as e:
             logger.critical(msg=f"Unable to acquire RedisConnection from {self._name}")
             logger.exception(e)
         else:
-            _redis = Redis(_redis_connection)
-            yield _redis
-            self._redis_pool.release(_redis_connection)
+            yield _redis_connection
+            _redis_connection.release()
 
     async def close_connection_pool(self) -> None:
         if self._redis_pool is not None:

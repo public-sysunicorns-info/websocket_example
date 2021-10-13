@@ -1,7 +1,6 @@
 from fastapi import APIRouter
+from .device import ws_router_device
 
-API_PREFIX="/ws"
+ws_router = APIRouter()
 
-api_router = APIRouter(
-    prefix=API_PREFIX
-)
+ws_router.include_router(ws_router_device)

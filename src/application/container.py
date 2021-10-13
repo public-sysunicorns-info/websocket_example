@@ -1,6 +1,8 @@
 
 from dependency_injector import providers, containers
 
+from application.service.device import DeviceService, ConnectionManager
+
 from .config.redis import RedisConfig
 from .config import ApplicationConfigModel, application_config_factory, application_instance_name
 
@@ -27,3 +29,19 @@ class ApplicationContainer(containers.DeclarativeContainer):
         application_instance_name=application_instance_name,
         health_service=health_service
     )
+
+    # Deps
+    device_connection_manager: providers.Singleton[ConnectionManager] = providers.Singleton(
+        ConnectionManager,
+        cache=cache,
+        application_instance_name=application_instance_name
+    )
+
+    # Service
+    device_service: providers.Singleton[DeviceService] = providers.Singleton(
+        DeviceService,
+        cache=cache,
+        connection_manager=device_connection_manager
+    )
+
+

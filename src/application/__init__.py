@@ -5,6 +5,7 @@ from asyncio import gather
 
 from application.container import ApplicationContainer
 from .api import api_router
+from .ws import ws_router
 from application import api
 
 class Application:
@@ -15,7 +16,7 @@ class Application:
     def __init__(self) -> None:
         
         # Init Dependency Injection
-        self.container.wire(packages=[api])
+        self.container.wire(packages=[api, ws])
         
         # Grab FastAPI
         self.fastapi = FastAPI(
@@ -26,6 +27,7 @@ class Application:
 
         # Include Router add api
         self.fastapi.include_router(router=api_router)
+        self.fastapi.include_router(router=ws_router)
 
         # Register handler
         self.fastapi.add_event_handler(event_type="startup", func=self.on_init)
@@ -33,12 +35,14 @@ class Application:
 
     async def on_init(self) -> None:
         await gather(
-            self.container.cache().init_connection_pool()
+            self.container.cache().init_connection_pool(),
+            self.container.device_connection_manager().register_application()
         )
 
     async def on_close(self) -> None:
         await gather(
-            self.container.cache().close_connection_pool()
+            self.container.cache().close_connection_pool(),
+            self.container.device_connection_manager().unregister_application()
         )
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
