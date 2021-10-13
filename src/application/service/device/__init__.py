@@ -59,7 +59,7 @@ class DeviceService:
         pass
 
     async def disconnect_device(self, device: Device, websocket: WebSocket) -> bool:
-        pass
+        await self.connection_manager.unregister_connection(websocket=websocket, device_id=device.device_id)
 
     async def disconnect_device_by_websocket(self, websocket: WebSocket) -> bool:
         _device = self.get_device_by_websocket(websocket=websocket)
