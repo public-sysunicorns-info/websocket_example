@@ -1,0 +1,7 @@
+
+tls:
+  certificates:
+    - certFile: "/var/traefik_ssl/websocket.local.pem"
+      keyFile: "/var/traefik_ssl/websocket.local.key.pem"
+      stores:
+        - default

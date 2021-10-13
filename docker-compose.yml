@@ -1,0 +1,64 @@
+version: '3'
+services:
+
+  api:
+    build: .
+    image: "websocket-api:latest"
+    env_file:
+      - app.env
+    ports:
+      - "8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=Host(`api.websocket.local`)"
+      - "traefik.http.routers.api.entrypoints=websecure"
+      - "traefik.http.routers.api.tls=true"
+      - "traefik.http.routers.api.tls.options=default"
+      - "traefik.http.routers.api.tls.domains[0].main=websocket.local"
+      - "traefik.http.routers.api.tls.domains[0].sans=api.websocket.local"
+
+  redis:
+    image: "redis:6.2-alpine"
+    ports:
+      - "6379:6379"
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - "8081"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.rediscommander.rule=Host(`rediscommander.websocket.local`)"
+      - "traefik.http.routers.rediscommander.entrypoints=websecure"
+      - "traefik.http.routers.rediscommander.tls=true"
+      - "traefik.http.routers.rediscommander.tls.options=default"
+      - "traefik.http.routers.rediscommander.tls.domains[0].main=websocket.local"
+      - "traefik.http.routers.rediscommander.tls.domains[0].sans=rediscommander.websocket.local"
+
+  traefik:
+    image: "traefik:v2.4"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./data/ssl:/var/traefik_ssl"
+      - "./data/traefik:/etc/traefik"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.websocket.local`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.options=default"
+      - "traefik.http.routers.traefik.tls.domains[0].main=websocket.local"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=traefik.websocket.local"
