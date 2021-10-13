@@ -52,11 +52,17 @@ class DeviceService:
     async def connect_device(self, device: Device, websocket: WebSocket) -> bool:
         await self.connection_manager.register_connection(websocket=websocket, device_id=device.device_id)
 
-    async def get_device_by_websocket(self, websocket: WebSocket) -> Union[Device, None]:
-        pass
+    async def send_event(device: Device, message: str) -> bool:
+        # Detect if and where the device is connected 
+        # Put the message in the good list
+        # ToDo : Create the worker part that listen for message to be send.
+        return False
+
+    async def get_device_by_device_id(self, device_id: str) -> Union[Device, None]:
+        return self.device_store.get(device_id, default=None)
 
     async def get_websocket_by_device(self, device: Device) -> Tuple[bool, Union[WebSocket, None]]:
-        pass
+        _wesocket = await self.connection_manager.get_websocket_by_device(device=device)
 
     async def disconnect_device(self, device: Device, websocket: WebSocket) -> bool:
         await self.connection_manager.unregister_connection(websocket=websocket, device_id=device.device_id)
