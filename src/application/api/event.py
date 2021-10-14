@@ -24,7 +24,7 @@ event_api_router = APIRouter()
     }
 )
 @inject
-def post_event_to_device(
+async def post_event_to_device(
     response: Response,
     device_id: str,
     device_service: DeviceService = Depends(Provide[ApplicationContainer.device_service])
