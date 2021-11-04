@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: websocket-api-env
+  namespace: websocket-example
+data:
+  REDIS_DEFAULT_URL: "redis://redis-headless.websocket-example.svc.cluster.local:6379"

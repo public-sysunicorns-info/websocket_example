@@ -10,5 +10,5 @@ But for Demo, it will use an API_KEY by Device
 ## Architecture Part
 - Authentication / Authorization Server [ KeyCloak ] [ Status: TODO ]
 - PKI [ HashicorpVault ] [ Status: TODO ]
-- Device Communication Server [ Python FASTAPI ] [Status: InProgress]
+- Device Communication Server [ Python FASTAPI ] [ Status: InProgress ]
 - Cache Server [ Redis ]

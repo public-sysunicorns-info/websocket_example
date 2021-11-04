@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-api
+  namespace: websocket-example
+spec:
+  selector:
+    matchLabels:
+      app: api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      imagePullSecrets:
+        - name: "github-gcr"
+      serviceAccountName: websocket-api-service-account
+      automountServiceAccountToken: true
+      containers:
+      - name: api
+        image: ghcr.io/public-sysunicorns-info/websocket-api:v0.0
+        ports:
+        - name: http-port
+          containerPort: 8080
+          protocol: TCP
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "250m"
+          limits:
+            memory: "100Mi"
+            cpu: "250m"
+        env:
+        - name: REDIS_DEFAULT_URL
+          valueFrom:
+            configMapKeyRef:
+              name: websocket-api-env
+              key: REDIS_DEFAULT_URL
+        - name: K8S_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: K8S_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: K8S_POD_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.serviceAccountName
+        volumeMounts:
+          - name: redis-password
+            mountPath: "/var/run/secrets/redis"
+            readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /api/health/liveness
+            port: http-port
+          periodSeconds: 2
+          terminationGracePeriodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /api/health/readiness
+            port: http-port
+          initialDelaySeconds: 2
+          periodSeconds: 2
+      volumes:
+        - name: redis-password
+          secret:
+            secretName: redis
+            items:
+              - key: redis-password
+                path: password

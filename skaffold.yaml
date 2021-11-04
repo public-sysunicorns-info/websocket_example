@@ -1,0 +1,29 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+metadata:
+  name: websocket-example
+build:
+  tagPolicy:
+    envTemplate:
+      template: "{{.VERSION_SHORT}}"
+  artifacts:
+    - image: ghcr.io/public-sysunicorns-info/websocket-api
+      context: .
+      docker:
+        dockerfile: Dockerfile
+        buildArgs: 
+          version: "{{ .VERSION_SHORT }}"
+          version_long: "{{ .VERSION_LONG }}"
+  local:
+    useDockerCLI: true
+    push: true
+deploy:
+  helm:
+    releases:
+      - name: redis
+        remoteChart: redis
+        namespace: websocket-example
+        repo: https://charts.bitnami.com/bitnami
+  kubectl:
+    manifests:
+      - "k8s/*.yaml"

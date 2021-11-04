@@ -1,8 +1,10 @@
+from os import name
 from fastapi import APIRouter, Depends
 from dependency_injector.wiring import inject, Provide
 from fastapi.responses import Response
 from http import HTTPStatus
 from pydantic import BaseModel, Field
+from application.config.kube import KubeConfigModel
 
 from application.service.health import HealthService
 from application.container import ApplicationContainer
@@ -24,9 +26,12 @@ router_api_health = APIRouter()
 @inject
 async def api_health(
     response: Response,
-    health_service: HealthService = Depends(Provide[ApplicationContainer.health_service])
+    health_service: HealthService = Depends(Provide[ApplicationContainer.health_service]),
+    application_instance_name: str = Depends(Provide[ApplicationContainer.application_instance_name]),
+    kube_config: KubeConfigModel = Depends(Provide[ApplicationContainer.kube_config])
 ):
     _health_model = HealthModel(
+        name=application_instance_name,
         health=health_service.health,
         liveness=health_service.liveness,
         readiness=health_service.readiness,
@@ -34,7 +39,8 @@ async def api_health(
         version_long=get_version(True),
         dependencies=HealthDependenciesModel(
             cache_health=health_service.cache_health
-        )
+        ),
+        kube_config=kube_config
     )
     
     if health_service.health:

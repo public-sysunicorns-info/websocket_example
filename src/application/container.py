@@ -1,5 +1,6 @@
 
 from dependency_injector import providers, containers
+from application.config.kube import KubeConfigModel
 
 from application.service.device import DeviceService, ConnectionManager
 
@@ -18,6 +19,7 @@ class ApplicationContainer(containers.DeclarativeContainer):
     application_instance_name: providers.Singleton[str] = providers.Singleton(application_instance_name, application_config=application_config)
 
     redis_config: providers.Singleton[RedisConfig] = providers.Singleton(RedisConfig)
+    kube_config: providers.Singleton[KubeConfigModel] = providers.Singleton(KubeConfigModel)
 
     # Technical
     health_service: providers.Singleton[HealthService] = providers.Singleton(

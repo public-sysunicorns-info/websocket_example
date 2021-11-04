@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-websocket-api-service
+  namespace: websocket-example
+  annotations:
+    cert-manager.io/cluster-issuer: "mkcert-ca-cluster-issuer"
+spec:
+  rules:
+  - host: api.websocket-example.minikube
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: websocket-api-service
+            port: 
+              number: 80
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.websocket-example.minikube
+      secretName: ingress-websocket-api-tls

@@ -1,12 +1,16 @@
 from fastapi import FastAPI
 from starlette.types import Receive, Scope, Send
 from asyncio import gather
+import logging
 
 
 from application.container import ApplicationContainer
 from .api import api_router
 from .ws import ws_router
 from application import api
+
+logger = logging.getLogger(__package__)
+
 
 class Application:
 
@@ -38,6 +42,8 @@ class Application:
             self.container.cache().init_connection_pool(),
             self.container.device_connection_manager().register_application()
         )
+
+        logger.debug(self.container.kube_config())
 
     async def on_close(self) -> None:
         await gather(

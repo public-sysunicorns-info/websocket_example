@@ -1,0 +1,8 @@
+skaffold.yaml
+k8s
+script
+docs
+data
+.vscode
+.venv
+README.md

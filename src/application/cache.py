@@ -28,6 +28,7 @@ class Cache:
             self._redis_pool = await create_redis_pool(
                 encoding=self.ENCODING,
                 address=self.redis_config.url,
+                password=self.redis_config.password,
                 db=self.redis_config.db_index,
                 maxsize=self.redis_config.pool_maxsize,
                 minsize=self.redis_config.pool_minsize
@@ -35,6 +36,7 @@ class Cache:
             print(self._redis_pool)
         except Exception as e:
             self.health_service.set_cache_health(cache_health=False)
+            logger.error(self.redis_config)
             logger.critical(f"Redis {self._name} Engine Unable to be created")
             logger.exception(e)
         else:
