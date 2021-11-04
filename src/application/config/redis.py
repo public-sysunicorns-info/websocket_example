@@ -1,5 +1,8 @@
 from pydantic import BaseSettings, Field
 import os
+import logging
+
+logger = logging.getLogger(__package__)
 
 
 DEFAULT_NAME: str = "DEFAULT"
@@ -11,10 +14,16 @@ DEFAULT_REDIS_PASSWORD_FILE_PATH = "/var/run/secrets/redis/password"
 
 
 def redis_config_password_factory():
-    if os.path.isfile(path=DEFAULT_REDIS_PASSWORD_FILE_PATH):
-        with open(file=DEFAULT_REDIS_PASSWORD_FILE_PATH, mode="r") as _file:
+    _redis_password_path = os.getenv("REDIS_DEFAULT_PASSWORD_PATH", default=DEFAULT_REDIS_PASSWORD_FILE_PATH)
+    logger.debug(_redis_password_path)
+    if os.path.isfile(path=_redis_password_path):
+        with open(file=_redis_password_path, mode="r") as _file:
             _password = _file.read()
-    return _password
+        logger.debug(f"File exist with {_password}")
+        return _password
+    else:
+        logger.debug("No File")
+        return None
 
 class RedisConfig(BaseSettings):
     name: str = DEFAULT_NAME

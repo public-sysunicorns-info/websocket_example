@@ -1,0 +1,8 @@
+version: 0.1
+volumeMounts:
+  - name: redis-password
+env:
+  - name: REDIS_DEFAULT_URL
+    value: redis://$(services:redis-headless):6379
+  - name: REDIS_DEFAULT_PASSWORD_PATH
+    value: $(volumeMounts:redis-password)/password

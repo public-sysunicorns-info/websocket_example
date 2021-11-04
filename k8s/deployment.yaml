@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: api
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: true
       containers:
       - name: api
-        image: ghcr.io/public-sysunicorns-info/websocket-api:v0.0
+        image: ghcr.io/public-sysunicorns-info/websocket-api:main
         ports:
         - name: http-port
           containerPort: 8080
@@ -61,18 +61,18 @@ spec:
           - name: redis-password
             mountPath: "/var/run/secrets/redis"
             readOnly: true
-        livenessProbe:
-          httpGet:
-            path: /api/health/liveness
-            port: http-port
-          periodSeconds: 2
-          terminationGracePeriodSeconds: 60
-        readinessProbe:
-          httpGet:
-            path: /api/health/readiness
-            port: http-port
-          initialDelaySeconds: 2
-          periodSeconds: 2
+        # livenessProbe:
+        #   httpGet:
+        #     path: /api/health/liveness
+        #     port: http-port
+        #   periodSeconds: 2
+        #   terminationGracePeriodSeconds: 60
+        # readinessProbe:
+        #   httpGet:
+        #     path: /api/health/readiness
+        #     port: http-port
+        #   initialDelaySeconds: 2
+        #   periodSeconds: 2
       volumes:
         - name: redis-password
           secret:

@@ -2,6 +2,17 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Application.Run with Kubernetes",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/src/main.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceRoot}",
+            "args": [],
+            "env": {},
+            "preLaunchTask": "bridge-to-kubernetes.resource"
+        },
+        {
             "name": "Application.Run",
             "type": "python",
             "request": "launch",
@@ -9,8 +20,7 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceRoot}",
             "args": [],
-            "env": {
-            }
+            "env": {}
         },
         {
             "name": "Client.Run",
@@ -20,8 +30,7 @@
             "console": "integratedTerminal",
             "cwd": "${workspaceRoot}",
             "args": [],
-            "env": {
-            }
-        }    
+            "env": {}
+        }
     ]
 }
