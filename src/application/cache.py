@@ -33,7 +33,6 @@ class Cache:
                 maxsize=self.redis_config.pool_maxsize,
                 minsize=self.redis_config.pool_minsize
             )
-            print(self._redis_pool)
         except Exception as e:
             self.health_service.set_cache_health(cache_health=False)
             logger.error(self.redis_config)
