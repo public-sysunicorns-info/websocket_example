@@ -14,7 +14,7 @@ spec:
         app: api
     spec:
       imagePullSecrets:
-        - name: "github-gcr"
+        - name: "github-ghcr"
       serviceAccountName: websocket-api-service-account
       automountServiceAccountToken: true
       containers:
