@@ -4,4 +4,4 @@ metadata:
   name: websocket-api-env
   namespace: websocket-example
 data:
-  REDIS_DEFAULT_URL: "redis://redis-headless.websocket-example.svc.cluster.local:6379"
+  REDIS_DEFAULT_URL: "redis://redis-master.websocket-example.svc.cluster.local:6379"
