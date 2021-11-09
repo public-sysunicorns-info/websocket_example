@@ -15,11 +15,9 @@ DEFAULT_REDIS_PASSWORD_FILE_PATH = "/var/run/secrets/redis/password"
 
 def redis_config_password_factory():
     _redis_password_path = os.getenv("REDIS_DEFAULT_PASSWORD_PATH", default=DEFAULT_REDIS_PASSWORD_FILE_PATH)
-    logger.debug(_redis_password_path)
     if os.path.isfile(path=_redis_password_path):
         with open(file=_redis_password_path, mode="r") as _file:
             _password = _file.read()
-        logger.debug(f"File exist with {_password}")
         return _password
     else:
         logger.debug("No File")
