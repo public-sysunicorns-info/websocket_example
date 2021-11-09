@@ -5,15 +5,15 @@ metadata:
 build:
   tagPolicy:
     envTemplate:
-      template: "{{.VERSION_SHORT}}"
+      template: "{{.VERSION_SHORT}}-dirty"
   artifacts:
     - image: ghcr.io/public-sysunicorns-info/websocket-api
       context: .
       docker:
         dockerfile: Dockerfile
         buildArgs: 
-          version: "{{ .VERSION_SHORT }}"
-          version_long: "{{ .VERSION_LONG }}"
+          version: "{{ .VERSION_SHORT }}-dirty"
+          version_long: "{{ .VERSION_LONG }}-dirty"
   local:
     useDockerCLI: true
     push: true
