@@ -1,0 +1,6 @@
+{
+  "name": "websocket-api",
+  "devDependencies": {
+    "semantic-release": "^18.0.0"
+  }
+}
