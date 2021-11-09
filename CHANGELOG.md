@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.1.0...v1.2.0) (2021-11-09)
+
+
+### Bug Fixes
+
+* **git-hook:** change rules from angular -> conventional ([5e308ca](https://github.com/public-sysunicorns-info/websocket_example/commit/5e308ca765009d1270da70937803dc1b5f6b84b4))
+
+
+### Features
+
+* **git_hook:** add Husky, commitlint, commitizen ([ccb3a79](https://github.com/public-sysunicorns-info/websocket_example/commit/ccb3a79ad253342cb85299d5fca9f109174a61b0))
+
 # [1.1.0](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.0.0...v1.1.0) (2021-11-09)
 
 
