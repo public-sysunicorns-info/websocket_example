@@ -143,3 +143,6 @@ cython_debug/
 # npm
 package-lock.json
 node_modules
+
+# husky
+.husky
