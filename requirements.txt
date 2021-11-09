@@ -14,7 +14,7 @@ idna==3.3
 pydantic==1.8.2
 six==1.16.0
 sniffio==1.2.0
-starlette==0.16.0
+starlette==0.17.0
 typing-extensions==3.10.0.2
 uvicorn==0.15.0
 uvloop==0.16.0
