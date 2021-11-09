@@ -10,7 +10,7 @@ def get_current_branch() -> Union[None, str]:
         try:
             with open(".git/HEAD", 'r') as _file:
                 _content = _file.read()
-            _cp_regex = re.compile(r'refs\/heads\/([a-zA-Z0-9]+)')
+            _cp_regex = re.compile(r'refs\/heads\/([a-zA-Z0-9\/]+)')
             _branch_result = _cp_regex.search(_content)
             _branch = _branch_result.group(1)
             return _branch
@@ -74,11 +74,11 @@ def get_version(full: bool=True) -> str:
 
 if __name__ == "__main__":
     _json_response = {
-        "branch": get_current_branch(),
+        "branch": str(get_current_branch()).replace("/","-"),
         "commit": get_current_commit(),
         "tags": get_current_tags(),
-        "version": get_version(full=False),
-        "version-long": get_version()
+        "version": str(get_version(full=False)).replace("/","-"),
+        "version-long": str(get_version()).replace("/","-")
     }
     print(
         json.dumps(_json_response)
