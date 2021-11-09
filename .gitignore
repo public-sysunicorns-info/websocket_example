@@ -139,3 +139,7 @@ cython_debug/
 
 # MacOs
 .DS_Store
+
+# npm
+package-lock.json
+node_modules
