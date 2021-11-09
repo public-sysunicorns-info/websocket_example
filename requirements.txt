@@ -4,7 +4,7 @@ asgiref==3.4.1
 async-timeout==4.0.0
 certifi==2021.10.8
 click==8.0.3
-dependency-injector==4.36.2
+dependency-injector==4.37.0
 fastapi==0.70.0
 gevent==21.8.0
 greenlet==1.1.2
