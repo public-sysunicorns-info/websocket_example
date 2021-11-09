@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.2.0...v1.2.1) (2021-11-09)
+
+
+### Bug Fixes
+
+* **git-hook:** fix rules of body-length for release ([7b69d71](https://github.com/public-sysunicorns-info/websocket_example/commit/7b69d717106f11c64ed506d074d879bb3444e1e7))
+
 # [1.2.0](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.1.0...v1.2.0) (2021-11-09)
 
 
