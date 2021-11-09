@@ -1,19 +1,36 @@
-FROM python:3.9.6 AS builder
-
-WORKDIR /wheels
+FROM python:3.9 AS builder
 
 # extra dependencies (over what buildpack-deps already includes)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     python3-dev
-COPY requirements.txt /wheels/
-RUN pip wheel -r requirements.txt -f /wheels
 
-FROM python:3.9.6-slim
+# Upgrade Pip
+RUN python -m pip install --upgrade pip
 
-WORKDIR /opt/app
+# Create Python User on Container
+RUN adduser --disabled-password python
+USER python
+WORKDIR /home/python
+ENV PATH="/home/python/.local/bin:${PATH}"
 
-COPY --from=builder /wheels /wheels
+# Prepare Dependencies
+COPY --chown=python:python requirements.txt /home/python/wheels/requirements.txt
+RUN pip wheel -r /home/python/wheels/requirements.txt -f /home/python/wheels
+
+FROM python:3.9-slim
+
+RUN python -m pip install --upgrade pip
+
+# Create Python User on Container
+RUN python -m pip install --upgrade pip
+RUN adduser --disabled-password python
+USER python
+WORKDIR /home/python
+ENV PATH="/home/python/.local/bin:${PATH}"
+
+# Retrive previously build wheels
+COPY --from=builder /home/python/wheels /home/python/wheels
 
 ARG version
 ARG version_long
@@ -28,9 +45,12 @@ LABEL org.opencontainers.image.source=https://github.com/public-sysunicorns-info
 
 EXPOSE 8080
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt -f /wheels && rm -rf /wheels && rm -rf /root/.cache/pip/*
+COPY --chown=python:python requirements.txt .
+RUN pip install --user -r requirements.txt -f /home/python/wheels
 
-COPY . .
+USER root
+RUN rm -rf /home/python/wheels && rm -rf /home/python/.cache/pip/*
 
+USER python
+COPY --chown=python:python . .
 CMD ["python", "./src/main.py"]
