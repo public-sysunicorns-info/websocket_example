@@ -24,6 +24,9 @@ deploy:
         remoteChart: redis
         namespace: websocket-example
         repo: https://charts.bitnami.com/bitnami
+        setValues:
+          architecture: standalone
+          replica.replicaCount: 0
   kubectl:
     manifests:
       - "k8s/*.yaml"
