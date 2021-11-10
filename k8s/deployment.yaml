@@ -70,18 +70,18 @@ spec:
           - name: redis-password
             mountPath: "/var/run/secrets/redis"
             readOnly: true
-        # livenessProbe:
-        #   httpGet:
-        #     path: /api/health/liveness
-        #     port: http-port
-        #   periodSeconds: 2
-        #   terminationGracePeriodSeconds: 60
-        # readinessProbe:
-        #   httpGet:
-        #     path: /api/health/readiness
-        #     port: http-port
-        #   initialDelaySeconds: 2
-        #   periodSeconds: 2
+        livenessProbe:
+          httpGet:
+            path: /api/health/liveness
+            port: http-port
+          periodSeconds: 2
+          terminationGracePeriodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /api/health/readiness
+            port: http-port
+          initialDelaySeconds: 2
+          periodSeconds: 2
       volumes:
         - name: redis-password
           secret:
