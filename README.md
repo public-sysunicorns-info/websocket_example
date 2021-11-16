@@ -12,3 +12,6 @@ But for Demo, it will use an API_KEY by Device
 - PKI [ HashicorpVault ] [ Status: TODO ]
 - Device Communication Server [ Python FASTAPI ] [ Status: InProgress ]
 - Cache Server [ Redis ]
+
+## Dev Setup Manual
+[See documentation](./docs/DEV_SETUP.md)
