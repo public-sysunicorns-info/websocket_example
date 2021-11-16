@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "mindaro.mindaro",
+        "ms-vscode-remote.remote-wsl",
+        "ms-vscode-remote.vscode-remote-extensionpack"
+    ]
+}
