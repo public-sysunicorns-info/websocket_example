@@ -1,3 +1,10 @@
+## [1.3.19](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.18...v1.3.19) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** remove Persist Creds from Checkout ([d9a9a73](https://github.com/public-sysunicorns-info/websocket_example/commit/d9a9a733d38d042882e4cedb4749b167413cf517))
+
 ## [1.3.18](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.17...v1.3.18) (2021-11-17)
 
 
