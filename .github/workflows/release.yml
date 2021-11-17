@@ -15,6 +15,7 @@ jobs:
       - name: Install Node Package
         run: npm install
       - name: Run Release Script
+        shell: bash
         run: |
           chmod +x "${GITHUB_WORKSPACE}/script/release.sh"
           # run script
