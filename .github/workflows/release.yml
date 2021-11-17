@@ -24,4 +24,4 @@ jobs:
     - name: Release
       run: ${GITHUB_WORKSPACE}/script/release.sh
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.PAT }}
