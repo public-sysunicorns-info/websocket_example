@@ -1,3 +1,10 @@
+## [1.3.8](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.7...v1.3.8) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** Using PAT instead of classic token ([5e89d01](https://github.com/public-sysunicorns-info/websocket_example/commit/5e89d011bb1db9065086d0f99852ce460ea123b2))
+
 ## [1.3.7](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.6...v1.3.7) (2021-11-17)
 
 
