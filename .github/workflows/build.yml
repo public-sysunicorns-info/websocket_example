@@ -18,12 +18,19 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
     - name: Login to Github Container Registry
       run: echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
       env:
-        GITHUB_USERNAME: ${{github.actor}}
+        GITHUB_USERNAME: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build
       run: ${GITHUB_WORKSPACE}/script/docker-build.sh
+      env:
+        GITHUB_TAG: ${{ steps.get_version.outputs.VERSION }}
     - name: Push
       run: ${GITHUB_WORKSPACE}/script/docker-push.sh
+      env:
+        GITHUB_TAG: ${{ steps.get_version.outputs.VERSION }}
