@@ -5,15 +5,23 @@ on:
       - "main"
 jobs:
   release:
+    # Only release on push to master
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
+    # Waits for test jobs for each Node.js version to complete
+    # needs: [test]
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: 8.1.3
-      - name: Install Node Package
-        run: npm install
-      - name: Run Release Script
-        shell: bash
-        run: "${GITHUB_WORKSPACE}/script/release.sh"
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+
+    - name: Install
+      run: npm ci
+
+    - name: Release
+      run: ${GITHUB_WORKSPACE}/script/release.sh
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
