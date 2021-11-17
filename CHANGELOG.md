@@ -1,3 +1,11 @@
+## [1.3.18](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.17...v1.3.18) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** move from Github Token to PAT ([5537c05](https://github.com/public-sysunicorns-info/websocket_example/commit/5537c052305678a28bb3a41fa6d7ffea901b8325))
+* **ci:** remove if on build ([4dcc7f5](https://github.com/public-sysunicorns-info/websocket_example/commit/4dcc7f51bed8a82414be03702ffeef757585381f))
+
 ## [1.3.17](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.16...v1.3.17) (2021-11-17)
 
 
