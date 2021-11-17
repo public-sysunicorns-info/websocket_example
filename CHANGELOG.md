@@ -1,3 +1,10 @@
+## [1.3.10](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.9...v1.3.10) (2021-11-17)
+
+
+### Bug Fixes
+
+* add ci env value for semantic-release ([7f0998e](https://github.com/public-sysunicorns-info/websocket_example/commit/7f0998e9c1512eaf90ee6bd2e9c572ba0ac3f770))
+
 ## [1.3.9](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.8...v1.3.9) (2021-11-17)
 
 
