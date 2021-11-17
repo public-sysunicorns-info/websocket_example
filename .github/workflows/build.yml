@@ -1,9 +1,15 @@
-name: Build and Push Image on Tag
+name: "Container Build and Push"
+
 on:
-  tags:
-    - v1.*
+  push:
+    branches:
+      - "main"
+    tags:
+      - v1.*
+      
 jobs:
-  build:
+  image_builder:
+    name: Build & Push Container to Github Container Registry
     # Only release on push to master
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
