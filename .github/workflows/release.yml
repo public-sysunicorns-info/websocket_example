@@ -17,6 +17,8 @@ jobs:
       - name: Run Release Script
         shell: bash
         run: |
-          chmod +x "${GITHUB_WORKSPACE}/script/release.sh"
+          ls
+          npx semantic-release
+          chmod +x ${GITHUB_WORKSPACE}/script/release.sh
           # run script
-          "${GITHUB_WORKSPACE}/script/release.sh"
+          ${GITHUB_WORKSPACE}/script/release.sh
