@@ -1,8 +1,10 @@
 name: "Container Build and Push"
-on:
+on: 
   push:
+    branches:
+      - "dev"
     tags:
-    - '*'
+      - "*"
 jobs:
   image_builder:
     name: Build & Push Container to Github Container Registry
