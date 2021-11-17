@@ -1,3 +1,10 @@
+## [1.3.7](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.6...v1.3.7) (2021-11-17)
+
+
+### Bug Fixes
+
+* tring ([fb717f2](https://github.com/public-sysunicorns-info/websocket_example/commit/fb717f2251f9bc7c090119b2dd6f16e6babb4ee3))
+
 ## [1.3.5](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.4...v1.3.5) (2021-11-17)
 
 
