@@ -1,6 +1,5 @@
 
-set -ex
-source .venv/bin/activate
+set -e
 
 image_name=websocket
 image_name_api=${image_name}-api
