@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.1...v1.3.2) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** change Username to actor ([044904f](https://github.com/public-sysunicorns-info/websocket_example/commit/044904f7f51ca08add9ede7ff4293641a92db6b4))
+
 ## [1.3.1](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.0...v1.3.1) (2021-11-17)
 
 
