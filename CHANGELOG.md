@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.2.2...v1.3.0) (2021-11-17)
+
+
+### Features
+
+* **ci:** Add Build  Push Docker on Tag ([e4827ef](https://github.com/public-sysunicorns-info/websocket_example/commit/e4827effbd4a3905ff69feec8424c3ada4e2b6dc))
+
 ## [1.2.2](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.2.1...v1.2.2) (2021-11-17)
 
 
