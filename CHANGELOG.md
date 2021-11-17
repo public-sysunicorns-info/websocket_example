@@ -1,3 +1,11 @@
+## [1.3.5](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.4...v1.3.5) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** trying ([4581ffd](https://github.com/public-sysunicorns-info/websocket_example/commit/4581ffd94ad3a6c03970a65a5a233442f63881bf))
+* **ci:** trying another trigger ([176b8c5](https://github.com/public-sysunicorns-info/websocket_example/commit/176b8c5dbf529bce13ef4264f62b0fec8c0c922d))
+
 ## [1.3.4](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.3...v1.3.4) (2021-11-17)
 
 
