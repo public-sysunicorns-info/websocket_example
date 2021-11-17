@@ -1,3 +1,26 @@
+## [1.2.2](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.2.1...v1.2.2) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** Add shell option to bash ([921d96d](https://github.com/public-sysunicorns-info/websocket_example/commit/921d96de9107b3842648c389c5d0a98cd3fa4846))
+* **ci:** change from action to script ([2494d0a](https://github.com/public-sysunicorns-info/websocket_example/commit/2494d0a6bb610f357bb6aa9275618b2137611d3d))
+* **ci:** fix branch name ([667eae8](https://github.com/public-sysunicorns-info/websocket_example/commit/667eae89b825993b2f180e824d04055392c64deb))
+* **ci:** fix node version on release ([e383492](https://github.com/public-sysunicorns-info/websocket_example/commit/e3834929a276fbec57d8bbc697f9061704cd9e65))
+* **ci:** restore run script add node version ([4c5207d](https://github.com/public-sysunicorns-info/websocket_example/commit/4c5207d90b815a498b03d383b3f13b02efa5f9b8))
+* **ci:** simplify run ([7d4b148](https://github.com/public-sysunicorns-info/websocket_example/commit/7d4b1482a87f8707b5ee2aa015fbee35f2b3f723))
+* **ci:** testing run command ([7b46c37](https://github.com/public-sysunicorns-info/websocket_example/commit/7b46c37e15afb1e995b8b71724bd4bfd38130d51))
+* **ci:** try another node version ([ed70266](https://github.com/public-sysunicorns-info/websocket_example/commit/ed702664be9be5b86e42618ef5543baf61c246e7))
+* **ci:** update run command ([50b06f9](https://github.com/public-sysunicorns-info/websocket_example/commit/50b06f903e8b48122aa973c000dcf6a41af1bc79))
+* **ci:** update run command ([0ac4008](https://github.com/public-sysunicorns-info/websocket_example/commit/0ac40088aa5f348cdf023a9820e9393e2b93c488))
+* **k8s:** Re-activate Liveness and Readiness Probe ([ed686c7](https://github.com/public-sysunicorns-info/websocket_example/commit/ed686c7d42038f63454ac993a444e5226815b2d4))
+* **tool:** clean dependencies ([d4287af](https://github.com/public-sysunicorns-info/websocket_example/commit/d4287af4b5fee181255963267d6f6d0803fe24e1))
+
+
+### Performance Improvements
+
+* **redis:** optimize with redis standalone mode ([f18429b](https://github.com/public-sysunicorns-info/websocket_example/commit/f18429b277c8ec214da465b0feb91b3a85537801))
+
 ## [1.2.1](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.2.0...v1.2.1) (2021-11-09)
 
 
