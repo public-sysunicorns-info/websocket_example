@@ -1,4 +1,4 @@
-name: "Container Build and Push"
+name: "Container Build and Push Test"
 on: 
   push:
     branches:
