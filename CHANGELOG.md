@@ -1,3 +1,10 @@
+## [1.3.11](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.10...v1.3.11) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** re-Adding trigger on push on main ([d959b1c](https://github.com/public-sysunicorns-info/websocket_example/commit/d959b1c246dd00de13fdf886ee4825495d6a308c))
+
 ## [1.3.10](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.9...v1.3.10) (2021-11-17)
 
 
