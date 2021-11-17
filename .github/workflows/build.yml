@@ -10,7 +10,6 @@ on:
 jobs:
   image_builder:
     name: Build & Push Container to Github Container Registry
-    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     # Waits for test jobs for each Node.js version to complete
     # needs: [test]
