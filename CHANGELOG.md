@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.2...v1.3.3) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** inject GITHUB TAG REF on build workflow ([14d326c](https://github.com/public-sysunicorns-info/websocket_example/commit/14d326cc89b87bb7399e17baba2e8702b2f28123))
+
 ## [1.3.2](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.1...v1.3.2) (2021-11-17)
 
 
