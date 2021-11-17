@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.0...v1.3.1) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** update trigger on build workflow ([f408dfb](https://github.com/public-sysunicorns-info/websocket_example/commit/f408dfb3da3b945d2c958dc96ff0f1892f15e52d))
+
 # [1.3.0](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.2.2...v1.3.0) (2021-11-17)
 
 
