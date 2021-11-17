@@ -1,3 +1,10 @@
+## [1.3.13](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.12...v1.3.13) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** remove --no-ci ([a9ee351](https://github.com/public-sysunicorns-info/websocket_example/commit/a9ee3510bc5d5b998c50f7b85206cabf435df8e7))
+
 ## [1.3.12](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.11...v1.3.12) (2021-11-17)
 
 
