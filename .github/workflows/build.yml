@@ -1,8 +1,6 @@
 name: "Container Build and Push Test"
 on: 
   push:
-    branches:
-      - "dev"
     tags:
       - "*"
 jobs:
