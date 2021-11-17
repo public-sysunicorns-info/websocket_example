@@ -7,4 +7,4 @@ plugin="${plugin},@semantic-release/changelog"
 plugin="${plugin},@semantic-release/git"
 plugin="${plugin}"
 
-npx semantic-release -b main -p "${plugin}" --no-ci
+npx semantic-release -b main -p "${plugin}"
