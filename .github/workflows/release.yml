@@ -26,3 +26,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.PAT }}
         CI: true
+        GIT_AUTHOR_NAME: ${{ github.actor }}
+        GIT_COMMITTER_NAME: ${{ github.actor }}
