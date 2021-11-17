@@ -4,22 +4,15 @@ on:
     branches:
       - "main"
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v2
+      - name: Install Node
+        uses: actions/setup-node@v1
         with:
-          branches: |
-            [
-              'main'
-            ]
-          extra_plugins: |
-            @semantic-release/github
-            @semantic-release/commit-analyzer
-            @semantic-release/release-notes-generator
-            @semantic-release/changelog
-            @semantic-release/git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          node-version: 8
+      - name: Install Node Package
+        run: npm install
+      - name: Run Release Script
+        run: chmod +rx ./script/release.sh && ./script/release.sh
