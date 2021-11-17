@@ -15,4 +15,4 @@ jobs:
       - name: Install Node Package
         run: npm install
       - name: Run Release Script
-        run: chmod +rx ./script/release.sh && ./script/release.sh
+        run: ./script/release.sh
