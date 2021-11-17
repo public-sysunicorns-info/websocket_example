@@ -24,7 +24,7 @@ jobs:
     - name: Release
       run: ${GITHUB_WORKSPACE}/script/release.sh
       env:
-        GITHUB_TOKEN: ${{ secrets.PAT }}
+        GH_TOKEN: ${{ secrets.PAT }}
         CI: true
         GIT_AUTHOR_NAME: ${{ github.actor }}
         GIT_COMMITTER_NAME: ${{ github.actor }}
