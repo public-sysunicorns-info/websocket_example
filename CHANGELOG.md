@@ -1,3 +1,10 @@
+## [1.3.9](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.8...v1.3.9) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ci:** removing if ([5f04cdc](https://github.com/public-sysunicorns-info/websocket_example/commit/5f04cdcd2cfa211d8b18064d2bdd096002d03653))
+
 ## [1.3.8](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.7...v1.3.8) (2021-11-17)
 
 
