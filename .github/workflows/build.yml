@@ -19,8 +19,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Login to Github Container Registry
-      run: echo $GITHUB_TOKEN | docker login ghcr.io -u miragecentury --password-stdin
+      run: echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
       env:
+        GITHUB_USERNAME: ${{github.actor}}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Build
       run: ${GITHUB_WORKSPACE}/script/docker-build.sh
