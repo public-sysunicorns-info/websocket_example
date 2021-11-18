@@ -53,7 +53,7 @@ def get_current_tags() -> List[str]:
     _github_ref = os.getenv("GITHUB_REF", None)
 
     if _github_ref_type == "tag":
-        _cp_regex = re.compile(r'refs\/tag\/([a-zA-Z0-9\/\.]+)')
+        _cp_regex = re.compile(r'refs\/tags\/([a-zA-Z0-9\/\.]+)')
         _tag_result = _cp_regex.search(_github_ref)
         _tag = _tag_result.group(1)
         return [_tag]
