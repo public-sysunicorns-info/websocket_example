@@ -1,3 +1,10 @@
+## [1.3.25](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.24...v1.3.25) (2021-11-18)
+
+
+### Bug Fixes
+
+* **ci:** adding more log on build action ([6d9db43](https://github.com/public-sysunicorns-info/websocket_example/commit/6d9db4304bb60868fe0396feb9cf927c1a01703e))
+
 ## [1.3.24](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.23...v1.3.24) (2021-11-18)
 
 
