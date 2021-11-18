@@ -1,3 +1,10 @@
+## [1.3.29](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.28...v1.3.29) (2021-11-18)
+
+
+### Bug Fixes
+
+* **version:** fix short version of the sha commit when use in github workflow ([8289102](https://github.com/public-sysunicorns-info/websocket_example/commit/8289102ec72c966df0ee6485c3ef45064efc0951)), closes [#10](https://github.com/public-sysunicorns-info/websocket_example/issues/10)
+
 ## [1.3.28](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.27...v1.3.28) (2021-11-18)
 
 
