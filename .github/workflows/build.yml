@@ -17,6 +17,14 @@ jobs:
     - name: Get the version
       id: get_version
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+    - name: Echo Version
+      run:  echo ${GITHUB_TAG}
+      env:
+        GITHUB_TAG: ${{ steps.get_version.outputs.VERSION }}
+    - name: Echo Python Version Result
+      run: python ${GITHUB_WORKSPACE}/src/application/version.py
+      env:
+        GITHUB_TAG: ${{ steps.get_version.outputs.VERSION }}
     - name: Login to Github Container Registry
       run: echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_USERNAME --password-stdin
       env:
