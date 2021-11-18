@@ -1,3 +1,10 @@
+## [1.3.27](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.26...v1.3.27) (2021-11-18)
+
+
+### Bug Fixes
+
+* **version:** fix wrong regex for tag extraction ([9919e2e](https://github.com/public-sysunicorns-info/websocket_example/commit/9919e2e86aed3c3f7663a96226bceb9b6db11fbc)), closes [#10](https://github.com/public-sysunicorns-info/websocket_example/issues/10) [#10](https://github.com/public-sysunicorns-info/websocket_example/issues/10)
+
 ## [1.3.26](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.25...v1.3.26) (2021-11-18)
 
 
