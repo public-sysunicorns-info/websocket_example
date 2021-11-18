@@ -1,3 +1,10 @@
+## [1.3.30](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.29...v1.3.30) (2021-11-18)
+
+
+### Bug Fixes
+
+* **version:** move sha commit length from 6 -> 7 to align policies ([b0e526c](https://github.com/public-sysunicorns-info/websocket_example/commit/b0e526c49ba705d084736de1edb502a6ad08944e))
+
 ## [1.3.29](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.28...v1.3.29) (2021-11-18)
 
 
