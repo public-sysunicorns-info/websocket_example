@@ -7,6 +7,9 @@ on:
     - "main"
     tags:
     - "v**"
+  create:
+    tags:
+    - "v**"
 jobs:
   image_builder:
     name: Build & Push Container to Github Container Registry
