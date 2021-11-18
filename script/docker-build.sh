@@ -15,8 +15,7 @@ docker build \
     --build-arg version_long=${version_long} \
     -t ${image_name_api}:latest \
     -t ${image_name_api}:${version_short} \
-    -t ${image_name_api}:${version_long} \
-    -t ${image_name_api}:${branch} \
+    -t ${image_name_api}:${version_long}
     -f Dockerfile .
 
 

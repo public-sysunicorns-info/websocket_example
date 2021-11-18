@@ -5,6 +5,9 @@ on:
   create:
     tags:
     - "v**"
+    push:
+      branches:
+        - "dev"
 jobs:
   image_builder:
     name: Build & Push Container to Github Container Registry
@@ -34,7 +37,13 @@ jobs:
       run: ${GITHUB_WORKSPACE}/script/docker-build.sh
       env:
         GITHUB_TAG: ${{ steps.get_version.outputs.VERSION }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_REF_TYPE: ${{ github.ref_type }}
+        GITHUB_COMMIT_SHA: ${{ github.sha }}
     - name: Push
       run: ${GITHUB_WORKSPACE}/script/docker-push.sh
       env:
         GITHUB_TAG: ${{ steps.get_version.outputs.VERSION }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_REF_TYPE: ${{ github.ref_type }}
+        GITHUB_COMMIT_SHA: ${{ github.sha }}

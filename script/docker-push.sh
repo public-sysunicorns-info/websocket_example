@@ -14,11 +14,7 @@ branch=$(echo ${json_version} | jq -r '.branch')
 #
 docker tag ${image_name_api}:${version_long} ghcr.io/public-sysunicorns-info/${image_name_api}:${version_long}
 docker tag ${image_name_api}:${version_long} ghcr.io/public-sysunicorns-info/${image_name_api}:${version_short}
-docker tag ${image_name_api}:${version_long} ghcr.io/public-sysunicorns-info/${image_name_api}:${branch}
-docker tag ${image_name_api}:latest ghcr.io/public-sysunicorns-info/${image_name_api}:latest
 
 #
 docker push ghcr.io/public-sysunicorns-info/${image_name_api}:${version_short}
 docker push ghcr.io/public-sysunicorns-info/${image_name_api}:${version_long}
-docker push ghcr.io/public-sysunicorns-info/${image_name_api}:${branch}
-docker push ghcr.io/public-sysunicorns-info/${image_name_api}:latest
