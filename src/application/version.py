@@ -1,7 +1,10 @@
 import os
 import re
 import json
+import logging
 from typing import Union, List
+
+logger=logging.getLogger(__package__)
 
 COMMIT_SHA_DEFAULT_LENGTH=6
 
@@ -84,6 +87,11 @@ if __name__ == "__main__":
         "version": str(get_version(full=False)).replace("/","-"),
         "version-long": str(get_version()).replace("/","-")
     }
+    # Log Response Data for Investigation
+    logger.info(
+        json.dumps(_json_response)
+    )
+    # Return Response Data
     print(
         json.dumps(_json_response)
     )
