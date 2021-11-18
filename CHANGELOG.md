@@ -1,3 +1,10 @@
+## [1.3.28](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.27...v1.3.28) (2021-11-18)
+
+
+### Bug Fixes
+
+* **ci:** fix missing env on echo and error in script ([7da6b24](https://github.com/public-sysunicorns-info/websocket_example/commit/7da6b24bf5539ab136bc083caf5a986760358d25)), closes [#10](https://github.com/public-sysunicorns-info/websocket_example/issues/10)
+
 ## [1.3.27](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.26...v1.3.27) (2021-11-18)
 
 
