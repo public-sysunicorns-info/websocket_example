@@ -1,3 +1,10 @@
+## [1.3.26](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.25...v1.3.26) (2021-11-18)
+
+
+### Bug Fixes
+
+* **version:** inject by Env Github Context ([5b97699](https://github.com/public-sysunicorns-info/websocket_example/commit/5b976996c1d2649ee1d68b2023242521cb39b248)), closes [#10](https://github.com/public-sysunicorns-info/websocket_example/issues/10)
+
 ## [1.3.25](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.24...v1.3.25) (2021-11-18)
 
 
