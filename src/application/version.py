@@ -6,7 +6,7 @@ from typing import Union, List
 
 logger=logging.getLogger(__package__)
 
-COMMIT_SHA_DEFAULT_LENGTH=6
+COMMIT_SHA_DEFAULT_LENGTH=7
 
 def get_current_branch() -> Union[None, str]:
     _github_ref_type = os.getenv("GITHUB_REF_TYPE", "branch")
