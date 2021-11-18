@@ -1,3 +1,10 @@
+## [1.3.22](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.21...v1.3.22) (2021-11-18)
+
+
+### Bug Fixes
+
+* **ci:** remove old push ([151a65d](https://github.com/public-sysunicorns-info/websocket_example/commit/151a65d6f3aff27998c8f8416c1cfe9a4be4f2eb))
+
 ## [1.3.21](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.20...v1.3.21) (2021-11-18)
 
 
