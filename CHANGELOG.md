@@ -1,3 +1,10 @@
+## [1.3.21](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.20...v1.3.21) (2021-11-18)
+
+
+### Bug Fixes
+
+* **ci:** adding create trigger ([4074b96](https://github.com/public-sysunicorns-info/websocket_example/commit/4074b96bb98418daa2c75b71d39058224f2e1425))
+
 ## [1.3.19](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.18...v1.3.19) (2021-11-17)
 
 
