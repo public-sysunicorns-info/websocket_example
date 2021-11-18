@@ -46,7 +46,10 @@ def get_current_commit(length=COMMIT_SHA_DEFAULT_LENGTH) -> Union[None, str]:
         else:
             return None
     else:
-        return _github_commit_sha
+        if length > 0:
+            return _github_commit_sha[0:length]
+        else:
+            return _github_commit_sha
 
 def get_current_tags() -> List[str]:
     _github_ref_type = os.getenv("GITHUB_REF_TYPE", "branch")
