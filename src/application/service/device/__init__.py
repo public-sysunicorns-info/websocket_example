@@ -25,6 +25,8 @@ class DeviceService:
         self.cache = cache
         self.connection_manager = connection_manager
 
+        # TODO : Create Device Store
+
         # Init Device Store for POC
         self.device_store = {
             "device_01": Device(device_id="device_01"),
@@ -43,6 +45,9 @@ class DeviceService:
         }
 
     async def authenticate_device(self, device_api_key: str) -> Tuple[bool, Union[Device, None]]:
+        """
+        Return True, False for the authentication and return Device object correspondingg
+        """
         _device_id = self.device_secret.get(device_api_key, None)
         if _device_id is None:
             return False, None
@@ -50,26 +55,35 @@ class DeviceService:
             return True, self.device_store.get(_device_id, None)
 
     async def connect_device(self, device: Device, websocket: WebSocket) -> bool:
+        """
+        Handle connection of the device and rely to the conenction manager
+        """
         await self.connection_manager.register_connection(websocket=websocket, device_id=device.device_id)
 
     async def send_event(device: Device, message: str) -> bool:
-        # Detect if and where the device is connected 
-        # Put the message in the good list
-        # ToDo : Create the worker part that listen for message to be send.
+        """
+        Send event to the device
+        Detect if device is connected to this instance or rely on another or disconnected
+        """
+        # TODO : Detect if and where the device is connected 
+        # TODO : Put the message in the instance of the device
+        # TODO : Create the worker part that listen for message to be send.
         return False
 
     async def get_device_by_device_id(self, device_id: str) -> Union[Device, None]:
+        """
+        Return Device Object from the device store
+        """
         return self.device_store.get(device_id, default=None)
 
-    async def get_websocket_by_device(self, device: Device) -> Tuple[bool, Union[WebSocket, None]]:
+    async def _get_websocket_by_device(self, device: Device) -> Tuple[bool, Union[WebSocket, None]]:
+        """
+        Internal function to retrieve websocket connection of the device
+        """
         _wesocket = await self.connection_manager.get_websocket_by_device(device=device)
 
     async def disconnect_device(self, device: Device, websocket: WebSocket) -> bool:
+        """
+        Handle device disconnection for device link to this instance.
+        """
         await self.connection_manager.unregister_connection(websocket=websocket, device_id=device.device_id)
-
-    async def disconnect_device_by_websocket(self, websocket: WebSocket) -> bool:
-        _device = self.get_device_by_websocket(websocket=websocket)
-        if _device is not None:
-            return self.disconnect_device(device=_device, websocket=websocket)
-        else:
-            return False
