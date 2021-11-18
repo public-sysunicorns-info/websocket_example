@@ -1,3 +1,10 @@
+## [1.3.24](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.23...v1.3.24) (2021-11-18)
+
+
+### Bug Fixes
+
+* **version:** removing patch code ([89cf726](https://github.com/public-sysunicorns-info/websocket_example/commit/89cf7261e1f61b3dc3acd53b516fbe6056a11dc5))
+
 ## [1.3.23](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.22...v1.3.23) (2021-11-18)
 
 
