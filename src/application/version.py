@@ -36,20 +36,16 @@ def get_current_commit(length=COMMIT_SHA_DEFAULT_LENGTH) -> Union[None, str]:
         return None
 
 def get_current_tags() -> List[str]:
-    _env_version = os.getenv("GITHUB_TAG", default=None)
-    if _env_version is None:
-        if os.path.exists(".git/refs/tags"):
-            _current_commit = get_current_commit(-1)
-            _tags_file_list = os.listdir(".git/refs/tags")
-            _tags = []
-            for _tag_file in _tags_file_list:
-                with open(f".git/refs/tags/{_tag_file}") as _file:
-                    _commit = _file.read().replace("\n","")
-                if _commit == _current_commit:
-                    _tags.append(_tag_file)
-            return _tags
-        else:
-            return [_env_version]
+    if os.path.exists(".git/refs/tags"):
+        _current_commit = get_current_commit(-1)
+        _tags_file_list = os.listdir(".git/refs/tags")
+        _tags = []
+        for _tag_file in _tags_file_list:
+            with open(f".git/refs/tags/{_tag_file}") as _file:
+                _commit = _file.read().replace("\n","")
+            if _commit == _current_commit:
+                _tags.append(_tag_file)
+        return _tags
     else:
         return []
 
@@ -87,10 +83,6 @@ if __name__ == "__main__":
         "version": str(get_version(full=False)).replace("/","-"),
         "version-long": str(get_version()).replace("/","-")
     }
-    # Log Response Data for Investigation
-    logger.info(
-        json.dumps(_json_response)
-    )
     # Return Response Data
     print(
         json.dumps(_json_response)
