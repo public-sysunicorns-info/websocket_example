@@ -1,3 +1,10 @@
+## [1.3.23](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.22...v1.3.23) (2021-11-18)
+
+
+### Bug Fixes
+
+* **version:** add log about version extraction ([6d08317](https://github.com/public-sysunicorns-info/websocket_example/commit/6d083173fb2d99bc0514368dd5f2178126b01b8f))
+
 ## [1.3.22](https://github.com/public-sysunicorns-info/websocket_example/compare/v1.3.21...v1.3.22) (2021-11-18)
 
 
