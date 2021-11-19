@@ -1,5 +1,5 @@
 from fastapi import WebSocket
-from typing import Dict
+from typing import Dict, List
 import logging
 
 from application.cache import Cache
@@ -69,11 +69,32 @@ class ConnectionManager:
         else:
             return True
 
-    async def unregister_connection(self, websocket: WebSocket, device_id: str):
+    async def unregister_connection(self, websocket: WebSocket, device_id: str) -> bool:
         """
         Unregister Connection for Device Connected to this specific instance
+        Returns:
+            Success Execution
         """
-        if self.local_device_store.get(device_id, None) is not None:
-            del self.local_device_store[device_id]
-            async with self.cache.acquire() as _cache_connection:
-                await _cache_connection.delete(key=self._get_device_key(device_id=device_id))
+        try:
+            if self.local_device_store.get(device_id, None) is not None:
+                del self.local_device_store[device_id]
+                async with self.cache.acquire() as _cache_connection:
+                    await _cache_connection.delete(key=self._get_device_key(device_id=device_id))
+        except RuntimeError as e:
+            logger.exception(e)
+            return False
+        else:
+            return True
+
+    async def get_device_connected(self) -> List[str]:
+        """
+        Get device connected to this instance
+        Returns:
+            List of string representing the device_id
+        """
+
+        _device_id_list = list()
+        for _device_id, _ in self.local_device_store.items():
+            _device_id_list.append(_device_id)
+
+        return _device_id_list

@@ -1,4 +1,4 @@
-from typing import Dict, Tuple, Union
+from typing import Dict, Tuple, Union, List
 from fastapi import WebSocket
 
 from application.cache import Cache
@@ -58,7 +58,7 @@ class DeviceService:
         """
         Handle connection of the device and rely to the conenction manager
         """
-        await self.connection_manager.register_connection(websocket=websocket, device_id=device.device_id)
+        return await self.connection_manager.register_connection(websocket=websocket, device_id=device.device_id)
 
     async def send_event(device: Device, message: str) -> bool:
         """
@@ -85,5 +85,22 @@ class DeviceService:
     async def disconnect_device(self, device: Device, websocket: WebSocket) -> bool:
         """
         Handle device disconnection for device link to this instance.
+        Returns:
+            Success Execution
         """
-        await self.connection_manager.unregister_connection(websocket=websocket, device_id=device.device_id)
+        return await self.connection_manager.unregister_connection(websocket=websocket, device_id=device.device_id)
+
+    async def get_device_connected(self, instance_only: bool = False) -> List[Device]:
+        """
+        Return Device Connected globally or on this instance
+        Returns:
+            Return List of Device
+        """
+        if instance_only:
+            _device_list = list()
+            for _device_id in await self.connection_manager.get_device_connected():
+                _device_list.append(Device(device_id=_device_id))
+            return _device_list
+        else:
+            
+            return list()
