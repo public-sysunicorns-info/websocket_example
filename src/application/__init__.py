@@ -38,8 +38,12 @@ class Application:
         self.fastapi.add_event_handler(event_type="shutdown", func=self.on_close)
 
     async def on_init(self) -> None:
+        # Technical Resource initialization
         await gather(
-            self.container.cache().init_connection_pool(),
+            self.container.cache().init_connection_pool()
+        )
+        # Need previous initialization before launch
+        await gather(
             self.container.device_connection_manager().register_application()
         )
 
@@ -47,7 +51,9 @@ class Application:
 
     async def on_close(self) -> None:
         await gather(
-            self.container.cache().close_connection_pool(),
+            self.container.cache().close_connection_pool()
+        )
+        await gather(
             self.container.device_connection_manager().unregister_application()
         )
 
