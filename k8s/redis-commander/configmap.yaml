@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-commander-env
+  namespace: websocket-example
+data:
+  HTTP_USER: "admin"
+  HTTP_PASSWORD: "admin"
+  REDIS_HOST: "redis-master.websocket-example.svc.cluster.local"
+  REDIS_PASSWORD_FILE: "/var/run/secrets/redis/password"

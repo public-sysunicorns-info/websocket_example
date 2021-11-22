@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-commander
+  namespace: websocket-example
+spec:
+  selector:
+    matchLabels:
+      app: redis-commander
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis-commander
+    spec:
+      automountServiceAccountToken: true
+      serviceAccountName: redis-commander-service-account
+      containers:
+      - name: redis-commander
+        image: rediscommander/redis-commander
+        imagePullPolicy: Always
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          capabilities:
+            drop:
+              - ALL
+        ports:
+        - name: http-port
+          containerPort: 8081
+          protocol: TCP
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: "250m"
+          limits:
+            memory: "100Mi"
+            cpu: "250m"
+        env:
+          - name: HTTP_USER
+            valueFrom:
+              configMapKeyRef:
+                name: redis-commander-env
+                key: HTTP_USER
+          - name: HTTP_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: redis-commander-env
+                key: HTTP_USER
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: redis-commander-env
+                key: REDIS_HOST
+          - name: REDIS_PASSWORD_FILE
+            valueFrom:
+              configMapKeyRef:
+                name: redis-commander-env
+                key: REDIS_PASSWORD_FILE
+          - name: REDIS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: redis
+                key: redis-password
+      volumes:
+        - name: redis-password
+          secret:
+            secretName: redis
+            items:
+              - key: redis-password
+                path: password

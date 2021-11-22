@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-redis-commander-service
+  namespace: websocket-example
+  annotations:
+    cert-manager.io/cluster-issuer: "mkcert-ca-cluster-issuer"
+spec:
+  rules:
+  - host: redis-commander.websocket-example.minikube
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: redis-commander-service
+            port: 
+              number: 80
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - redis-commander.websocket-example.minikube
+      secretName: ingress-redis-commander-api-tls
