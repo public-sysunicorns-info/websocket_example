@@ -104,3 +104,8 @@ class DeviceService:
         else:
             
             return list()
+
+    async def get_application_list(self):
+        """
+        """
+        return await self.connection_manager.get_application_list()

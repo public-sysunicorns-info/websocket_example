@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from typing import AsyncContextManager
+from typing import AsyncContextManager, Union
 from aioredis import Redis, create_redis_pool, ConnectionsPool
 import logging
 
@@ -43,12 +43,13 @@ class Cache:
             logger.info(f"Redis {self._name=} Engine Creation Success")
 
     @asynccontextmanager
-    async def acquire(self) -> AsyncContextManager[Redis]:
+    async def acquire(self) -> AsyncContextManager[Union[Redis, None]]:
         try:
             _redis_connection = await self._redis_pool.connection.acquire()
-        except Exception as e:
+        except RuntimeError as e:
             logger.critical(msg=f"Unable to acquire RedisConnection from {self._name}")
             logger.exception(e)
+            yield None
         else:
             _redis = Redis(_redis_connection)
             yield _redis
