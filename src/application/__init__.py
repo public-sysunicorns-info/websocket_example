@@ -50,12 +50,15 @@ class Application:
         logger.debug(self.container.kube_config())
 
     async def on_close(self) -> None:
-        await gather(
-            self.container.cache().close_connection_pool()
-        )
+        # Functional Closing
         await gather(
             self.container.device_connection_manager().unregister_application()
         )
+        # Technical Resource Closing
+        await gather(
+            self.container.cache().close_connection_pool()
+        )
+        
 
     async def __call__(self, scope: Scope, receive: Receive, send: Send) -> None:
         return await self.fastapi.__call__(scope=scope, receive=receive, send=send)
