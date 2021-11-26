@@ -44,9 +44,9 @@ class ConnectionManager:
         while self.refresh_want_running:
             await asyncio.sleep(self.APPLICATION_CONNECTION_REGISTER_TTL - self.DELTA_TTL)
             logger.info("Refresh Registration")
-            await self.register_application()
+            await self.register_application(launch_refresh_task=False)
 
-    async def register_application(self) -> bool:
+    async def register_application(self, launch_refresh_task: bool = True) -> bool:
         """
         Register the Application
         """
@@ -64,8 +64,10 @@ class ConnectionManager:
         except RuntimeError as e:
             return False
         else:
-            self.refresh_want_running = True
-            self.refresh_task = asyncio.ensure_future(self._refresh_application_registration())
+            if launch_refresh_task:
+                self.refresh_want_running = True
+                self.refresh_task = asyncio.ensure_future(self._refresh_application_registration())
+            
             return True
 
     async def unregister_application(self) -> None:
