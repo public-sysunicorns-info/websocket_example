@@ -5,7 +5,7 @@ async-timeout==4.0.1
 certifi==2021.10.8
 click==8.0.3
 dependency-injector==4.37.0
-fastapi==0.70.0
+fastapi==0.70.1
 gevent==21.8.0
 greenlet==1.1.2
 h11==0.12.0
