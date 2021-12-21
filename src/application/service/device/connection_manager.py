@@ -31,19 +31,19 @@ class ConnectionManager:
     refresh_want_running: bool = False
     refresh_task = None
 
-    local_device_store: Dict[str, WebSocket]
+    connected_device_store: Dict[str, WebSocket]
 
     def __init__(self, cache: Cache, application_instance_name: str) -> None:
         self.accept_connection = True
         self.cache = cache
         self.application_instance_name = application_instance_name
-        self.local_device_store = dict()
+        self.connected_device_store = dict()
         self.refresh_want_running = False
 
     async def _refresh_application_registration(self):
         while self.refresh_want_running:
             await asyncio.sleep(self.APPLICATION_CONNECTION_REGISTER_TTL - self.DELTA_TTL)
-            logger.info("Refresh Registration")
+            logger.info("ConnectionManager: Refresh Registration")
             await self.register_application(launch_refresh_task=False)
 
     async def register_application(self, launch_refresh_task: bool = True) -> bool:
@@ -74,17 +74,20 @@ class ConnectionManager:
         """
         Unregister the Application
         """
-        # TODO : Remove the Instance Name from Redis
         # TODO : How manage the crash of application ? (liveness probing)
         async with self.cache.acquire() as _connection:
             if _connection is not None:
-                await _connection.delete(
-                    key=f"{self.PREFIX_KEY_APPLICATION}{self.application_instance_name}"
-                )
                 self.refresh_want_running = False
                 await self.refresh_task
+                _result = await _connection.delete(
+                    key=f"{self.PREFIX_KEY_APPLICATION}{self.application_instance_name}"
+                )
+                if _result == 1:
+                    logger.info("ConnectionManager: Unregister of the Application Success")
+                else:
+                    logger.error("ConnectionManager: Application Not Register")
             else:
-                logger.critical("Unable to acquire connection from pool")
+                logger.critical("ConnectionManager: Unable to acquire connection from pool")
 
     async def get_application_list(self) -> Union[List[str], None]:
         """
@@ -134,9 +137,9 @@ class ConnectionManager:
                         key=self._get_device_key(device_id=device_id), 
                         value=self.application_instance_name
                     )
-                    self.local_device_store[device_id] = websocket
+                    self.connected_device_store[device_id] = websocket
                 else:
-                    logger.critical("Unable to acquire connection from pool")
+                    logger.critical("ConnectionManager: Unable to acquire connection from pool")
                     return False
         except RuntimeError as e:
             logger.exception(e)
@@ -151,19 +154,34 @@ class ConnectionManager:
             Success Execution
         """
         try:
-            if self.local_device_store.get(device_id, None) is not None:
-                del self.local_device_store[device_id]
+            if self.connected_device_store.get(device_id, None) is not None:
+                del self.connected_device_store[device_id]
                 async with self.cache.acquire() as _connection:
                     if _connection is not None:
                         await _connection.delete(key=self._get_device_key(device_id=device_id))
                     else:
-                        logger.critical("Unable to acquire connection from the pool")
+                        logger.critical("ConnectionManager: Unable to acquire connection from the pool")
                         return False
         except RuntimeError as e:
             logger.exception(e)
             return False
         else:
             return True
+
+    async def get_device(self, device_id: str) -> Union[str, None]:
+        try:
+            async with self.cache.acquire() as _connection:
+                if _connection is not None:
+                    _application_instance = await _connection.get(
+                        key=self._get_device_key(device_id=device_id)
+                    )
+                    return _application_instance
+                else:
+                    logger.critical("ConnectionManager: Unable to acquire connection from pool")
+                    return None
+        except RuntimeError as e:
+            logger.exception(e)
+            return None
 
     async def get_device_connected(self) -> List[str]:
         """
@@ -173,7 +191,22 @@ class ConnectionManager:
         """
 
         _device_id_list = list()
-        for _device_id, _ in self.local_device_store.items():
+        for _device_id, _ in self.connected_device_store.items():
             _device_id_list.append(_device_id)
 
         return _device_id_list
+
+    async def disconnect_device_on_current_instance(self, device):
+        pass
+
+    async def disconnect_all_device_on_current_instance(self):
+        _list = list()
+        
+        for _device in await self.get_device_connected():
+            _list.append(
+                asyncio.create_task(
+                    self.disconnect_device_on_current_instance(_device)
+                )
+            )
+
+        await asyncio.wait(_list)

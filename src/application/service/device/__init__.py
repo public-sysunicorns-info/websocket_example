@@ -1,5 +1,6 @@
 from typing import Dict, Tuple, Union, List
 from fastapi import WebSocket
+import logging
 
 from application.cache import Cache
 from .model import Device
@@ -11,6 +12,9 @@ __all__ = (
     "ConnectionManager"
 )
 
+logger = logging.getLogger(__package__)
+
+
 class DeviceService:
 
     device_store: Dict[str, Device]
@@ -21,7 +25,7 @@ class DeviceService:
     connection_manager: ConnectionManager
 
     def __init__(self, cache: Cache, connection_manager: ConnectionManager) -> None:
-
+        
         self.cache = cache
         self.connection_manager = connection_manager
 
@@ -60,12 +64,16 @@ class DeviceService:
         """
         return await self.connection_manager.register_connection(websocket=websocket, device_id=device.device_id)
 
-    async def send_event(device: Device, message: str) -> bool:
+    async def send_event(self, device: Device, message: str) -> bool:
         """
         Send event to the device
         Detect if device is connected to this instance or rely on another or disconnected
         """
-        # TODO : Detect if and where the device is connected 
+        # TODO : Detect if and where the device is connected
+
+        _application_instance = await self.connection_manager.get_device(device_id=device.device_id)
+        logger.info(_application_instance)
+
         # TODO : Put the message in the instance of the device
         # TODO : Create the worker part that listen for message to be send.
         return False
@@ -74,7 +82,7 @@ class DeviceService:
         """
         Return Device Object from the device store
         """
-        return self.device_store.get(device_id, default=None)
+        return self.device_store.get(device_id, None)
 
     async def _get_websocket_by_device(self, device: Device) -> Tuple[bool, Union[WebSocket, None]]:
         """
@@ -102,7 +110,6 @@ class DeviceService:
                 _device_list.append(Device(device_id=_device_id))
             return _device_list
         else:
-            
             return list()
 
     async def get_application_list(self):

@@ -29,7 +29,7 @@ async def post_event_to_device(
     device_id: str,
     device_service: DeviceService = Depends(Provide[ApplicationContainer.device_service])
 ):
-    _device = device_service.get_device_by_device_id(device_id=device_id)
+    _device = await device_service.get_device_by_device_id(device_id=device_id)
 
     if _device is None:
         response.status_code = HTTPStatus.NOT_FOUND.value
