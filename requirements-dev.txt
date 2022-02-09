@@ -6,7 +6,7 @@ certifi==2021.10.8
 click==8.0.3
 dependency-injector==4.38.0
 fastapi==0.73.0
-gevent==21.8.0
+gevent==21.12.0
 greenlet==1.1.2
 h11==0.13.0
 hiredis==2.0.0
